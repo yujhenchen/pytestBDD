@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
-from basepage import BasePage
-from utils.waits import Waits
-from utils.actions import Actions
+from src.pages.basepage import BasePage
+from src.utils.waits import Waits
+from src.utils.actions import Actions
 
 
 class HomePage(BasePage):
@@ -13,12 +13,12 @@ class HomePage(BasePage):
             By.CSS_SELECTOR, "//input[value='Google Search']")
 
     def keyin_search(self, text):
-        webelement = Waits.get_visible_element(self.search)
+        webelement = Waits.get_visible_element(self.driver,self.search)
         webelement = Actions.clear_input_element(webelement)
         webelement.sendKeys(text)
         return self
 
     def click_search(self):
-        webelement = Waits.get_visible_element(self.search)
+        webelement = Waits.get_visible_element(self.driver, self.search)
         webelement.click()
         return self
