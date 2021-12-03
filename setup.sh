@@ -12,7 +12,7 @@ conda activate work_env
 # Install required packages
 conda install -c conda-forge --name work_env git -y
 conda install -c conda-forge --name work_env pytest-bdd -y
-conda install -c conda-forge --name work_env webdrivermanager -y
+conda install -c conda-forge --name work_env webdriver-manager -y
 conda install -c conda-forge --name work_env selenium -y
 
 # Update packages
