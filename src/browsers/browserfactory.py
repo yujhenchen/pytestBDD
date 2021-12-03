@@ -1,5 +1,7 @@
 from selenium import webdriver
 from src.browsers.chrome import Chrome
+
+
 class BrowserFactory(object):
     def __init__(self):
         super().__init__()

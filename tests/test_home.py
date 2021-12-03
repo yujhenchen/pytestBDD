@@ -1,6 +1,7 @@
 from src.pages.home import HomePage
 from src.browsers.browserfactory import BrowserFactory
 
+
 def test_search():
     driver = BrowserFactory.get_chrome()
     driver.get('https://www.google.com/')
