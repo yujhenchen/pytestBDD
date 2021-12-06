@@ -3,9 +3,13 @@ from src.browsers.browserfactory import BrowserFactory
 
 
 def test_search():
-    driver = BrowserFactory.get_chrome()
-    driver.get('https://www.google.com/')
-    driver.maximize_window()
-    home = HomePage(driver)
-    home.keyin_search('search')
-    driver.close()
+    try:
+        driver = BrowserFactory.get_chrome()
+        driver.get("https://blog.testproject.io/")
+        driver.maximize_window()
+        home = HomePage(driver)
+        home.keyin_search("selenium")
+    except Exception:
+        assert False
+    finally:
+        driver.close()
