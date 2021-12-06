@@ -1,4 +1,3 @@
-import time
 from src.pages.home import HomePage
 from src.browsers.browserfactory import BrowserFactory
 
@@ -19,5 +18,4 @@ def test_search():
     except Exception:
         assert False
     finally:
-        time.sleep(5)
         driver.close()
