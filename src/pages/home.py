@@ -12,8 +12,8 @@ class HomePage(object):
         self.searchFormXpath = "//aside[@id='secondary']//form[@class='search-form']"
         self.searchInput = (
             By.XPATH, self.searchFormXpath + "//input[@class='search-field']")
-        self.searchIcon = (
-            By.XPATH, self.searchFormXpath + "//span[@class='glass']")
+        # self.searchIcon = (
+        #     By.XPATH, self.searchFormXpath + "/child::span")  # fail to locate
         # Search Results for:
         self.searchResultsHeader = (By.CLASS_NAME, "page-title")
 
@@ -23,10 +23,11 @@ class HomePage(object):
         self.createAccountButton = (
             By.CSS_SELECTOR, "input[value='Create an Account']")
         # signup
+        self.thirdPartySignUpUrl = "https://auth.testproject.io/auth/realms/TP/protocol/openid-connect/auth?client_id=tp.app&redirect_uri=https://app.testproject.io/callback.html&response_type=code&scope=openid"
         self.signUpWithGoogleLink = (
-            By.CSS_SELECTOR, "a[href='https://auth.testproject.io/auth/realms/TP/protocol/openid-connect/auth?client_id=tp.app&redirect_uri=https://app.testproject.io/callback.html&response_type=code&scope=openid&kc_idp_hint=google']")
+            By.CSS_SELECTOR, "a[href='" + self.thirdPartySignUpUrl + "&kc_idp_hint=google']")
         self.signUpWithGoogleLink = (
-            By.CSS_SELECTOR, "a[href='https://auth.testproject.io/auth/realms/TP/protocol/openid-connect/auth?client_id=tp.app&redirect_uri=https://app.testproject.io/callback.html&response_type=code&scope=openid&kc_idp_hint=microsoft']")
+            By.CSS_SELECTOR, "a[href='" + self.thirdPartySignUpUrl + "&kc_idp_hint=microsoft']")
         self.subscribeSubmitButton = (
             By.CLASS_NAME, "yikes-easy-mc-submit-button yikes-easy-mc-submit-button-1 btn btn-primary  popup-link")
 
@@ -41,8 +42,13 @@ class HomePage(object):
         return self
 
     def click_search_icon(self):
+        # failed to locate search icon
+        # webelement = Waits.get_visible_element(self.driver, self.searchInput)
+        # webelement.click()
+
+        # use send key enter to perform search
         webelement = Waits.get_visible_element(self.driver, self.searchInput)
-        webelement.click()
+        webelement.send_keys(Keys.ENTER)
         return self
 
     def get_search_results_title(self, searchText):
