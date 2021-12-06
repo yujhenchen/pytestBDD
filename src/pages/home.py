@@ -9,10 +9,13 @@ class HomePage(object):
         self.driver = driver
 
         # search area
-        self.searchForm = (By.CSS_SELECTOR, "form[class='search-form']")
+        self.searchFormXpath = "//aside[@id='secondary']//form[@class='search-form']"
         self.searchInput = (
-            By.XPATH, "/form/label/input[@class='search-field']")  # inside a form
-        self.searchIcon = (By.CLASS_NAME, "glass")
+            By.XPATH, self.searchFormXpath + "//input[@class='search-field']")
+        self.searchIcon = (
+            By.XPATH, self.searchFormXpath + "//span[@class='glass']")
+        # Search Results for:
+        self.searchResultsHeader = (By.CLASS_NAME, "page-title")
 
         # login and signup area
         # login
@@ -30,16 +33,20 @@ class HomePage(object):
         # subscribe
         self.subscribeEmailInput = (By.ID, "yikes-easy-mc-form-1-EMAIL")
 
-    def keyin_search(self, text):
-        # webelement = Waits.get_visible_element(self.driver, self.searchInput)
-        # webelement.send_keys(Keys.CONTROL + "a")
-        # webelement.send_keys(Keys.DELETE)
-        # webelement.send_keys(text)
-        webelement = Waits.get_visible_element(self.driver, self.searchForm)
-        webelement.click()
+    def keyin_search(self, searchText):
+        webelement = Waits.get_visible_element(self.driver, self.searchInput)
+        webelement.send_keys(Keys.CONTROL + "a")
+        webelement.send_keys(Keys.DELETE)
+        webelement.send_keys(searchText)
         return self
 
     def click_search_icon(self):
         webelement = Waits.get_visible_element(self.driver, self.searchInput)
         webelement.click()
         return self
+
+    def get_search_results_title(self, searchText):
+        webelement = Waits.get_visible_element(
+            self.driver, self.searchResultsHeader)
+        searchResultsTitle = webelement.text
+        return self, searchResultsTitle
