@@ -10,7 +10,8 @@ class HomePage(object):
 
         # search area
         self.searchForm = (By.CSS_SELECTOR, "form[class='search-form']")
-        self.searchInput = (By.XPATH, "/form/label/input[@class='search-field']")  # inside a form
+        self.searchInput = (
+            By.XPATH, "/form/label/input[@class='search-field']")  # inside a form
         self.searchIcon = (By.CLASS_NAME, "glass")
 
         # login and signup area
