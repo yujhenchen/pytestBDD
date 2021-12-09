@@ -42,11 +42,13 @@ class HomePage(object):
         return self
 
     def click_search_icon(self):
-        # failed to locate search icon
-        # webelement = Waits.get_visible_element(self.driver, self.searchInput)
-        # webelement.click()
+        # click search icon (failed to locate search icon)
+        webelement = Waits.get_visible_element(self.driver, self.searchInput)
+        webelement.click()
+        return self
 
-        # use send key enter to perform search
+    def press_keyboard_enter(self):
+        # send key enter via keyboard to perform search
         webelement = Waits.get_visible_element(self.driver, self.searchInput)
         webelement.send_keys(Keys.ENTER)
         return self
