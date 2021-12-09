@@ -1,8 +1,10 @@
+from pytest_bdd import scenario, given, when, then
 from src.pages.home import HomePage
 from src.browsers.browserfactory import BrowserFactory
 
 
-def test_search():
+@scenario('search_article.feature', 'search keyword selenium')
+def test_search_article():
     try:
         targetUrl = "https://blog.testproject.io/"
         queryStr = "selenium"
