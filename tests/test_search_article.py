@@ -1,12 +1,14 @@
+import pytest
 from pytest_bdd import scenario, given, when, then
 from src.pages.home import HomePage
 from src.browsers.browserfactory import BrowserFactory
 
 # parameters
-targetUrl = "https://blog.testproject.io/"
-queryStr = "selenium"
+pytest.targetUrl = "https://blog.testproject.io/"
+pytest.queryStr = "selenium"
 # variables
-home = None
+pytest.home = None
+
 
 
 @scenario("search_article.feature", "search keyword selenium")
@@ -34,19 +36,19 @@ def test_search_article():
 @given("navigate to the home page of the TestProject Test Automation Blog")
 def navigate_to_home():
     driver = BrowserFactory.get_chrome()
-    driver.get(targetUrl)
+    driver.get(pytest.targetUrl)
     driver.maximize_window()
-    home = HomePage(driver)
+    pytest.home = HomePage(driver)
 
 
 @when("I keyin the keyword in the keyword search field and click Enter on keyboard in the keyword search field")
 def keyin_keyword():
-    home = home.keyin_search(queryStr)
-    home = home.press_keyboard_enter()
+    pytest.home = pytest.home.keyin_search(pytest.queryStr)
+    pytest.home = pytest.home.press_keyboard_enter()
 
 
 @then("search results title contain the keyword that I searched for")
 def contain_keyword():
-    home, searchResultsTitle = home.get_search_results_title(queryStr)
+    pytest.home, searchResultsTitle = pytest.home.get_search_results_title(pytest.queryStr)
     # verify query string in the search results title
-    assert (queryStr in searchResultsTitle)
+    assert (pytest.queryStr in searchResultsTitle)
